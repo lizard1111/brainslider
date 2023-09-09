@@ -196,6 +196,28 @@
 
             svgContainer.addEventListener('wheel', handleScroll);
 
+            let startY;
+
+            // Listen for the start of a touch event
+            svgContainer.addEventListener('touchstart', function(event) {
+                // Get the Y-coordinate of the touch event
+                startY = event.touches[0].clientY;
+            }, false);
+
+            // Listen for the end of a touch event
+            svgContainer.addEventListener('touchend', function(event) {
+                // Calculate the difference between the start and end Y-coordinates
+                let deltaY = startY - event.changedTouches[0].clientY;
+
+                // If deltaY is positive, it's an upward swipe (equivalent to scrolling down on a mouse)
+                if (deltaY > 0) {
+                    showNextSVG();
+                } else {
+                    showPreviousSVG();
+                }
+            }, false);
+
+
 
             // function togglePlayPause() {
             //     isPlaying = !isPlaying;
