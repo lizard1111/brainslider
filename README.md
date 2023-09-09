@@ -1,0 +1,2 @@
+# brainslider
+fixed
